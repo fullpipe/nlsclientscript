@@ -19,18 +19,18 @@ Fork of [nlsclientscript](https://github.com/nlac/nlsclientscript)
 * removed `includePattern` option
 * removed `excludePattern` option
 * added `separate` option for client script package
-  ```php
-    'common' => array(
-        'baseUrl' => '/',
-        'css'     => ['css/main.css'],
-        'js'      => array('js/main.js'),
-        'separate' => true,
-        'depends' => [
-            'jquery',
-            'cookie',
-            'bootstrap',
-            'angular',
-        ],
-    ),
-  ```
-  this package will be rendered separately always
+```php
+  'common' => array(
+      'baseUrl' => '/',
+      'css'     => ['css/main.css'],
+      'js'      => array('js/main.js'),
+      'separate' => true,
+      'depends' => [
+          'jquery',
+          'cookie',
+          'bootstrap',
+          'angular',
+      ],
+  ),
+```
+this package will be rendered separately always

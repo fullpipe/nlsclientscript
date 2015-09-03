@@ -141,6 +141,8 @@ class NLSClientScript extends \CClientScript
      */
     public $curlConnectionTimeOut = 15;
 
+    protected $separated = array();
+
     /**
      * Base dir to save all stuffs.
      */
@@ -427,8 +429,6 @@ class NLSClientScript extends \CClientScript
         return parent::registerCssFile($this->addAppVersion($url), $media);
     }
 
-    private $separeted = array();
-
     public function registerCoreScript($name)
     {
         if (isset($this->coreScripts[$name])) {
@@ -447,11 +447,11 @@ class NLSClientScript extends \CClientScript
         }
 
         if (isset($package)) {
-            if (isset($this->separeted[$name])) {
+            if (isset($this->separated[$name])) {
                 return $this;
             }
 
-            foreach ($this->separeted as $cs) {
+            foreach ($this->separated as $cs) {
                 if (isset($cs->packages[$name])) {
                     return $this;
                 }
@@ -468,8 +468,8 @@ class NLSClientScript extends \CClientScript
             $params = func_get_args();
             $this->recordCachingAction('clientScript', 'registerCoreScript', $params);
 
-            if (isset($package['separete']) && $package['separete']) {
-                $this->separeted[$name] = clone $this;
+            if (isset($package['separate']) && $package['separate']) {
+                $this->separated[$name] = clone $this;
                 $this->reset();
             }
         } elseif (YII_DEBUG) {
@@ -483,7 +483,7 @@ class NLSClientScript extends \CClientScript
 
     public function render(&$output)
     {
-        foreach ($this->separeted as $cs) {
+        foreach ($this->separated as $cs) {
             $cs->render($output);
         }
 
