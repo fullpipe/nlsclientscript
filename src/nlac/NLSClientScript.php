@@ -112,14 +112,6 @@ class NLSClientScript extends \CClientScript
     public $mergeIfXhr = false;
 
     /**
-     * code of a js function, prepares a get url by adding the script url hashes already in the dom
-     * (has effect only if mergeIfXhr is true).
-     *
-     * @param string $resMap2Request
-     */
-    public $resMap2Request = 'function(url){if (!url.match(/\?/))url += "?";return url + "&nlsc_map=" + $.nlsc.smap();};';
-
-    /**
      * Optional, version of the application.
      * If set to not empty, will be appended to the merged js/css urls (helps to handle cached resources).
      *
@@ -285,12 +277,10 @@ class NLSClientScript extends \CClientScript
 
             if ($this->forceMergeJs || !file_exists($path)) {
                 $merged = '';
-                $nlsCode = ';if (!$.nlsc) $.nlsc={resMap:{}};' . "\r\n";
 
                 foreach ($scriptFiles as $absUrl => $h) {
                     $ret = $this->downloader->get($absUrl);
                     $merged .= ($ret . ";\r\n");
-                    $nlsCode .= '$.nlsc.resMap["' . $absUrl . '"]={h:"' . $h . '",d:1};' . "\r\n";
                 }
 
                 $this->downloader->close();
@@ -299,7 +289,7 @@ class NLSClientScript extends \CClientScript
                     $merged = Minifier::minify($merged);
                 }
 
-                file_put_contents($path, $name . $merged . $nlsCode);
+                file_put_contents($path, $name . $merged);
             }
 
             $finalScriptFiles[$url] = $url;

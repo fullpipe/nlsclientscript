@@ -18,6 +18,7 @@ Fork of [nlsclientscript](https://github.com/nlac/nlsclientscript)
 * cs fixes
 * removed `includePattern` option
 * removed `excludePattern` option
+* removed `resMap2Request` option
 * added `separate` option for client script package
 ```php
   'common' => array(
