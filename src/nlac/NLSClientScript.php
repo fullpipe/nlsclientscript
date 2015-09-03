@@ -429,6 +429,9 @@ class NLSClientScript extends \CClientScript
         return parent::registerCssFile($this->addAppVersion($url), $media);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function registerCoreScript($name)
     {
         if (isset($this->coreScripts[$name])) {
@@ -452,7 +455,7 @@ class NLSClientScript extends \CClientScript
             }
 
             foreach ($this->separated as $cs) {
-                if (isset($cs->packages[$name])) {
+                if (isset($cs->corePackages[$name])) {
                     return $this;
                 }
             }
@@ -481,6 +484,9 @@ class NLSClientScript extends \CClientScript
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function render(&$output)
     {
         foreach ($this->separated as $cs) {
@@ -488,5 +494,13 @@ class NLSClientScript extends \CClientScript
         }
 
         parent::render($output);
+    }
+
+    /**
+     * Clone NLSClientScript.
+     */
+    public function __clone()
+    {
+        $this->separated = array();
     }
 }
