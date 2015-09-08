@@ -190,7 +190,7 @@ class NLSClientScript extends \CClientScript
      */
     protected function hashedName($name, $ext = 'js')
     {
-        $r = 'nls' . crc32($name);
+        $r = 'nls' . crc32($name . $this->appVersion);
         if ($ext == 'css' && $this->downloadCssResources) {
             $r .= '.dcr';
         }
@@ -198,9 +198,6 @@ class NLSClientScript extends \CClientScript
             $r .= '.min';
         }
         $r .= '.' . $ext;
-        if ($this->appVersion) {
-            $r .= '?' . $this->appVersion;
-        }
 
         return $r;
     }
