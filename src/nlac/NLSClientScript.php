@@ -198,6 +198,9 @@ class NLSClientScript extends \CClientScript
             $r .= '.min';
         }
         $r .= '.' . $ext;
+        if ($this->appVersion) {
+            $r .= '?' . $this->appVersion;
+        }
 
         return $r;
     }
