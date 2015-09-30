@@ -445,7 +445,7 @@ class NLSClientScript extends \CClientScript
             }
 
             foreach ($this->separated as $cs) {
-                if (isset($cs->packages[$name])) {
+                if (isset($cs->packages[$name]) && !(isset($package['separate']) && $package['separate'])) {
                     return $this;
                 }
             }
